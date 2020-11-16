@@ -1,0 +1,31 @@
+@font-face {
+  font-family: "SF Pro Display";
+  src: url("./assets/fonts/SFProDisplay-Regular.ttf");
+  font-weight: 500;
+}
+
+@font-face{
+  font-family: "SF Mono";
+  src: url("./assets/fonts/SFMono-Heavy.otf");
+  font-weight: 900;
+}
+
+@font-face {
+  font-family: "SF Pro Rounded";
+  src: url("./assets//fonts/SF-Pro-Rounded-Regular.ttf");
+  font-weight: 400;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: content-box;
+}
+
+body{
+  font-family: Helvetica, sans-serif;
+}
+
+ul{
+  list-style: none;
+}

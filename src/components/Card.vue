@@ -27,6 +27,13 @@ export default {
 
 <style lang="scss" scoped>
 .card-container {
-  padding: 60px;
+  padding: 36px;
+  border-radius: 24px;
+}
+
+@media screen and (min-width: 768px) {
+  .card-container {
+    padding: 60px;
+  }
 }
 </style>

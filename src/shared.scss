@@ -8,6 +8,7 @@
   font-family: "SF Pro Display";
   src: url("./assets/fonts/SFProDisplay-LightItalic.ttf");
   font-weight: 300;
+  font-style: italic;
 }
 
 @font-face {
@@ -16,8 +17,7 @@
   font-weight: 900;
 }
 
-
-@font-face{
+@font-face {
   font-family: "SF Mono";
   src: url("./assets/fonts/SFMono-Heavy.otf");
   font-weight: 900;
@@ -35,10 +35,24 @@
   box-sizing: content-box;
 }
 
-body{
+body {
   font-family: Helvetica, sans-serif;
+  background: #f4f5f7;
 }
 
-ul{
+ul {
   list-style: none;
+}
+
+.card-title__red {
+  color: #d0021b;
+  font: 24px "SF Pro Display";
+  font-weight: 300;
+  font-style: italic;
+}
+
+.card-text__large {
+  font: 48px "SF Pro Display";
+  font-weight: 900;
+  color: #000;
 }

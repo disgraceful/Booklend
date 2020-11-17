@@ -160,7 +160,7 @@ header ul,
 
 .nav-searchbar {
   flex-grow: 10;
-  margin: 0 1rem;
+  margin: 0 0.6rem;
 }
 
 .nav-searchbar > input[type="text"] {
@@ -172,20 +172,17 @@ header ul,
   border: none;
 }
 
-.nav-searchbar > input[type="text"]:focus {
-  // outline:
-}
-
 .nav-actions {
   padding: 20px 0;
 }
 
-.nav-actions i {
-  font-size: 22px;
+.nav-actions > li:nth-of-type(1) {
+  margin-right: 1rem;
 }
 
-.nav-actions > li:nth-of-type(1) {
-  margin-right: 1.5rem;
+.nav-actions i {
+  font-size: 22px;
+  display: block;
 }
 
 .side-enter-active,

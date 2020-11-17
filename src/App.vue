@@ -1,5 +1,7 @@
 <template>
-  <div><bl-header></bl-header></div>
+  <div>
+    <bl-header></bl-header>
+  </div>
 </template>
 
 <script lang="ts">

@@ -48,7 +48,10 @@
           </bl-card>
         </div>
       </section>
-      <section id="recent"></section>
+      <section id="recent">
+        <h1 class="section-title">Recently added</h1>
+        <bl-carousel :items="carouselItems"></bl-carousel>
+      </section>
     </div>
   </main>
 </template>
@@ -56,19 +59,57 @@
 <script>
 import Card from "./Card.vue";
 import Button from "./Button.vue";
-import Fab from "./Fab";
+import Fab from "./Fab.vue";
+import Carousel from "./Carousel.vue";
+import { ref } from "vue";
 export default {
   components: {
     "bl-card": Card,
     "bl-btn": Button,
     "bl-fab": Fab,
+    "bl-carousel": Carousel,
+  },
+
+  setup() {
+    const carouselItems = ref([
+      {
+        title: "Sepsis Management in Resource-limited Settings",
+        url: require("../assets/img/bookasset1.jpg"),
+      },
+      {
+        title: "Tuberculosis in Adults and Children",
+        url: require("../assets/img/bookasset1.jpg"),
+      },
+      {
+        title: "Red Book Atlas of Pediatric Infectious Diseases",
+        url: require("../assets/img/bookasset1.jpg"),
+      },
+      {
+        title: "Mandell, Douglas, and Bennett's Principles and Practice of…",
+        url: require("../assets/img/bookasset1.jpg"),
+      },
+      {
+        title: "add1",
+        url: require("../assets/img/bookasset1.jpg"),
+      },
+      {
+        title: "add2",
+        url: require("../assets/img/bookasset1.jpg"),
+      },
+      {
+        title: "add3",
+        url: require("../assets/img/bookasset1.jpg"),
+      },
+    ]);
+
+    return { carouselItems };
   },
 };
 </script>
 
 <style lang="scss" scoped>
-main {
-  margin: 16px 16px;
+section {
+  margin: 30px 0;
 }
 
 .main-cards {
@@ -150,9 +191,15 @@ main {
   color: #fff;
 }
 
+.section-title {
+  color: #000;
+  font: 700 72px "SF Pro Display";
+  text-align: center;
+}
+
 @media screen and (min-width: 768px) {
-  main {
-    margin: 80px 16px;
+  section {
+    margin: 80px 0;
   }
 
   .main-card:not(:nth-of-type(1)) {
@@ -164,6 +211,10 @@ main {
     margin-bottom: -40px;
     margin-top: 4px;
     justify-content: flex-end;
+  }
+
+  .section-title {
+    text-align: start;
   }
 }
 </style>

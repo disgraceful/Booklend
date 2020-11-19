@@ -2,9 +2,7 @@
   <div
     class="bl-fab"
     :class="{ 'bl-fab__right': right, 'bl-fab__disabled': this.disabled }"
-  >
-    <div class="bl-fab__content"></div>
-  </div>
+  ></div>
 </template>
 
 <script>
@@ -54,57 +52,53 @@ export default {
   transition: all 0.3s ease-in;
 }
 
-.bl-fab__right > .bl-fab__content {
+.bl-fab.bl-fab__right {
   transform: rotateY(180deg);
 }
 
-.bl-fab > .bl-fab__content {
-  position: relative;
-  height: 24px;
-  width: 24px;
-  top: 50%;
-  left: 50%;
-  margin-left: -12px;
-  margin-top: -12px;
-}
-
-.bl-fab__content::after,
-.bl-fab__content::before {
+.bl-fab::after,
+.bl-fab::before {
   content: "";
   position: absolute;
   background-color: $red-solid;
   height: 2px;
   width: 8px;
-  border-radius: 5px;
+  border-radius: 8px;
   z-index: 5;
   transition: all 0.3s ease-in;
+  left: calc(50% + 3px);
 }
 
-.bl-fab__content::after {
+.bl-fab::after {
   top: 25%;
-  transform: rotate(45deg) translateY(5px);
+  transform: rotate(45deg) translateY(9px);
 }
 
-.bl-fab__content::before {
+.bl-fab::before {
   top: 75%;
-  transform: rotate(-45deg) translateY(-5px);
+  transform: rotate(-45deg) translateY(-9px);
 }
 
 .bl-fab:hover {
   background-color: $red-solid;
+  cursor: pointer;
 }
 
-.bl-fab:hover .bl-fab__content::after,
-.bl-fab:hover .bl-fab__content::before {
+.bl-fab:hover.bl-fab::after,
+.bl-fab:hover.bl-fab::before {
   background-color: #fff;
 }
 
-.bl-fab__disabled {
+.bl-fab__disabled,
+.bl-fab__disabled:hover {
   background-color: $grey-transparent;
+  cursor: default;
 }
 
-.bl-fab__disabled > .bl-fab__content::after,
-.bl-fab__disabled > .bl-fab__content::before {
+.bl-fab__disabled.bl-fab::after,
+.bl-fab__disabled.bl-fab::before,
+.bl-fab__disabled:hover.bl-fab::after,
+.bl-fab__disabled:hover.bl-fab::before {
   background-color: #000;
 }
 </style>

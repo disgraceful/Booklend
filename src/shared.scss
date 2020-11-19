@@ -1,7 +1,15 @@
+@import "./variables";
+
 @font-face {
-  font-family: "SF Pro Display";
-  src: url("./assets/fonts/SFProDisplay-Regular.ttf");
+ font-family: "SF Pro Display";
+  src: url("./assets/fonts/SFProDisplay-Medium.ttf");
   font-weight: 500;
+}
+
+@font-face{
+   font-family: "SF Pro Display";
+   src: url("./assets/fonts/SFProDisplay-Regular.ttf");
+   font-weight: 400;
 }
 
 @font-face {
@@ -9,6 +17,12 @@
   src: url("./assets/fonts/SFProDisplay-LightItalic.ttf");
   font-weight: 300;
   font-style: italic;
+}
+
+@font-face{
+  font-family: "SF Pro Display";
+  src: url("./assets/fonts/SFProDisplay-Bold.ttf");
+  font-weight: 700;
 }
 
 @font-face {
@@ -25,7 +39,7 @@
 
 @font-face {
   font-family: "SF Pro Rounded";
-  src: url("./assets//fonts/SF-Pro-Rounded-Regular.ttf");
+  src: url("./assets/fonts/SF-Pro-Rounded-Regular.ttf");
   font-weight: 400;
 }
 
@@ -44,15 +58,14 @@ ul {
   list-style: none;
 }
 
-.card-title__red {
-  color: #d0021b;
-  font: 24px "SF Pro Display";
-  font-weight: 300;
-  font-style: italic;
+.container{
+  max-width: 940px;
+  margin: 0 auto;
+  padding: 0 16px;
 }
 
-.card-text__large {
-  font: 48px "SF Pro Display";
-  font-weight: 900;
-  color: #000;
+
+
+.text--red{
+  color: $red-solid;
 }

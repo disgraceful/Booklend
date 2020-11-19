@@ -1,43 +1,47 @@
 <template>
   <header>
-    <div class="header-content">
-      <div class="logo" @click="toggleSidebar">
-        <div class="logo__icon">R</div>
-        <div class="logo__company">
-          Digital <br />
-          Library
+    <div class="container">
+      <div class="header-content">
+        <div class="logo" @click="toggleSidebar">
+          <div class="logo__icon">R</div>
+          <div class="logo__company">
+            Digital <br />
+            Library
+          </div>
         </div>
-      </div>
-      <transition name="side">
-        <div class="nav-sidebar" v-show="sidebarOpened">
-          <ul class="nav-sidebar__list">
-            <li @click="toggleSidebar">Close Menu</li>
-            <li v-for="link in links" :key="link">{{ link }}</li>
-          </ul>
-        </div>
-      </transition>
-      <div class="spacer"></div>
+        <transition name="down">
+          <div class="nav-sidebar" v-show="sidebarOpened">
+            <ul class="nav-sidebar__list">
+              <li @click="toggleSidebar">Close Menu</li>
+              <li v-for="link in links" :key="link">{{ link }}</li>
+            </ul>
+          </div>
+        </transition>
+        <div class="spacer"></div>
 
-      <ul class="nav-links" v-show="!searchOpened">
-        <li class="nav-links__item" v-for="link in links" :key="link">
-          {{ link }}
-        </li>
-      </ul>
-      <div class="nav-searchbar" v-show="searchOpened">
-        <input type="text" name="search" placeholder="Search" />
+        <ul class="nav-links" v-show="!searchOpened">
+          <li class="nav-links__item" v-for="link in links" :key="link">
+            {{ link }}
+          </li>
+        </ul>
+        <transition name="side">
+          <div class="nav-searchbar" v-show="searchOpened">
+            <input type="text" name="search" placeholder="Search" />
+          </div>
+        </transition>
+        <ul class="nav-actions">
+          <li>
+            <i class="material-icons" @click="searchOpened = !searchOpened">
+              {{ searchText }}
+            </i>
+          </li>
+          <li>
+            <i class="material-icons">
+              account_circle
+            </i>
+          </li>
+        </ul>
       </div>
-      <ul class="nav-actions">
-        <li>
-          <i class="material-icons" @click="searchOpened = !searchOpened">
-            {{ searchText }}
-          </i>
-        </li>
-        <li>
-          <i class="material-icons">
-            account_circle
-          </i>
-        </li>
-      </ul>
     </div>
   </header>
 </template>
@@ -65,7 +69,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 header {
   background: #181819;
   color: #f5f5f5;
@@ -73,9 +77,6 @@ header {
 
 .header-content {
   display: flex;
-  max-width: 940px;
-  margin: 0 auto;
-  padding: 0 16px;
   font-family: "SF Pro Display";
   align-items: center;
 }
@@ -95,6 +96,7 @@ header ul,
 }
 
 .logo__icon {
+  display: inline-block;
   font: 48px "SF Mono";
   position: relative;
 }
@@ -103,7 +105,6 @@ header ul,
   content: "2";
   color: #d0021b;
   font-size: 24px;
-  // line-height: 29px;
   position: absolute;
   opacity: 1;
   top: 26px;
@@ -161,6 +162,9 @@ header ul,
 .nav-searchbar {
   flex-grow: 10;
   margin: 0 0.6rem;
+  transform: scaleX(1);
+  transform-origin: right;
+  transition: all 0.3s ease-out;
 }
 
 .nav-searchbar > input[type="text"] {
@@ -185,9 +189,14 @@ header ul,
   display: block;
 }
 
+.down-enter-active,
+.down-leave-active {
+  transform: scaleY(0);
+}
+
 .side-enter-active,
 .side-leave-active {
-  transform: scaleY(0);
+  transform: scaleX(0);
 }
 
 @media screen and (min-width: 768px) {

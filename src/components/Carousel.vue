@@ -105,7 +105,6 @@ export default {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-gap: 20px;
-  padding-top: 20px;
   justify-items: center;
   width: 70%;
   margin: 0 auto;

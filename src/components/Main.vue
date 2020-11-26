@@ -44,7 +44,15 @@
               You'll see how the new version of the R2 Digital Library is a
               powerful eBook solution for your institution.
             </p>
-            <div class="img-container"></div>
+            <div class="video-container">
+              <img
+                class="video"
+                src="https://interamericanheart.org/wp-content/uploads/2020/03/covid19maxresdefault.jpg"
+              />
+              <button class="play-btn">
+                <div class="play-btn--arrow"></div>
+              </button>
+            </div>
           </bl-card>
         </div>
       </section>
@@ -294,6 +302,7 @@ section > * {
   font: 48px "SF Pro Display";
   font-weight: 900;
 }
+
 .card-light .card-text__heading {
   color: #000;
 }
@@ -331,6 +340,84 @@ section > * {
   color: #fff;
 }
 
+.video-container {
+  width: 210px;
+  height: 160px;
+  position: absolute;
+  margin-top: 8px;
+  bottom: 20px;
+  right: 20px;
+  cursor: pointer;
+  transition: all 0.2s ease-out;
+  box-shadow: 0 20px 40px 0 rgba(208, 2, 27, 0.3);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.video-container:hover {
+  transform: translate(6px, 6px);
+  box-shadow: 0 10px 20px 0 rgba(208, 2, 27, 0.3);
+}
+
+.video-container::after {
+  content: "";
+  height: 100%;
+  width: 100%;
+  background-color: rgba(208, 2, 27, 0.7);
+  top: 0;
+  left: 0;
+  z-index: 4;
+  position: absolute;
+}
+
+.video-container > .video {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.video-container > .play-btn {
+  margin: 0;
+  position: absolute;
+  width: 72px;
+  height: 72px;
+  border: 8px solid rgba(255, 255, 255, 0.3);
+  background-clip: padding-box;
+  top: calc(50% - 36px);
+  left: 50%;
+  margin-left: -36px;
+  z-index: 10;
+  background-color: #fff;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.2s ease-out;
+}
+
+.play-btn:hover {
+  border-color: #fff;
+  background-clip: border-box;
+}
+
+.play-btn:hover > .play-btn--arrow {
+  left: calc(50% - 13px);
+  top: calc(50% - 25px);
+  border-top: 26px solid transparent;
+  border-bottom: 26px solid transparent;
+  border-left: 35px solid #d0021b;
+}
+
+.play-btn--arrow {
+  position: absolute;
+  left: calc(50% - 5px);
+  top: calc(50% - 10px);
+  width: 0;
+  height: 0;
+  border-top: 12px solid transparent;
+  border-bottom: 12px solid transparent;
+  border-left: 16px solid #d0021b;
+}
+
 .card-icon {
   font-size: 46px;
   padding-bottom: 10px;
@@ -339,6 +426,7 @@ section > * {
 .card-icon.icon-red {
   color: #c62828;
 }
+
 .card-icon.icon-blue {
   color: #42a5f5;
 }
@@ -358,22 +446,24 @@ section > * {
 }
 
 .main-card .card-img {
-  position: absolute;
-  top: 60px;
-  right: 60px;
   width: 400px;
   height: 400px;
   overflow: hidden;
-  text-align: right;
+  text-align: center;
+  margin-bottom: -120px;
+  margin-left: 140px;
 }
 
 .card-img > img {
-  width: 70%;
+  margin: 20px 40px;
   height: 100%;
+  width: auto;
   border-top-right-radius: 10px;
   border-top-left-radius: 10px;
   object-fit: cover;
   object-position: top;
+  box-sizing: border-box;
+  box-shadow: 0px 0px 20px 5px rgba(0, 0, 0, 0.2);
 }
 
 .grid-card {
@@ -388,7 +478,7 @@ section > * {
 .card-mini.card-light {
   background-color: $red-solid;
   padding: 20px 24px;
-  box-shadow: 0px 10px 20px 0px $red-transparent;
+  box-shadow: 0px 0px 20px 5px $red-transparent;
 }
 
 .card-mini i {

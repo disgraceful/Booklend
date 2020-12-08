@@ -71,74 +71,86 @@ export default {
 
 <style lang="scss">
 header {
-  background: #181819;
-  color: #f5f5f5;
+  background: color("black-solid");
+  color: color("white-solid");
+  z-index: 5;
+
+  ul,
+  .logo {
+    display: flex;
+  }
 }
 
 .header-content {
   display: flex;
   font-family: "SF Pro Display";
   align-items: center;
-}
 
-.header-content li:hover {
-  cursor: pointer;
-}
-
-header ul,
-.logo {
-  display: flex;
+  li {
+    &:hover {
+      cursor: pointer;
+    }
+  }
 }
 
 .logo {
   color: #fff;
   opacity: 0.8;
-}
 
-.logo__icon {
-  display: inline-block;
-  font: 48px "SF Mono";
-  position: relative;
-}
+  .logo__icon {
+    display: inline-block;
+    font: 48px "SF Mono";
+    position: relative;
 
-.logo__icon::after {
-  content: "2";
-  color: #d0021b;
-  font-size: 24px;
-  position: absolute;
-  opacity: 1;
-  top: 26px;
-  transform: translateX(-7px);
-}
+    &::after {
+      content: "2";
+      color: color("red-solid");
+      font-size: 24px;
+      position: absolute;
+      opacity: 1;
+      top: 26px;
+      transform: translateX(-7px);
+    }
+  }
 
-.logo__company {
-  font: 14px "SF Pro Rounded";
-  text-transform: uppercase;
-  align-self: center;
-  margin-left: 1rem;
+  .logo__company {
+    font: 14px "SF Pro Rounded";
+    text-transform: uppercase;
+    align-self: center;
+    margin-left: 1rem;
+  }
 }
 
 .spacer {
   flex-grow: 1;
+  @media screen and (min-width: $tablet) {
+    display: none;
+  }
 }
 
 .nav-sidebar {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   height: 100vh;
   width: 100%;
-  background: #181819;
+  background: color("black-solid");
   padding: 12px 16px;
   box-sizing: border-box;
   font-size: 48px;
   transform: scaleY(1);
   transform-origin: top;
   transition: all 0.3s ease-in-out;
+  z-index: 5;
+
+  .nav-sidebar__list {
+    flex-flow: column wrap;
+  }
 }
 
-.nav-sidebar__list {
-  flex-flow: column wrap;
+.nav-sidebar li:hover,
+.nav-links li:hover {
+  color: color("red-solid");
 }
 
 .nav-links {
@@ -148,15 +160,14 @@ header ul,
   line-height: 21px;
   flex-grow: 1;
   justify-content: center;
-}
 
-.nav-links > .nav-links__item {
-  margin-left: 1.2rem;
-}
+  & > .nav-links__item {
+    margin-left: 1.2rem;
+  }
 
-.nav-sidebar li:hover,
-.nav-links li:hover {
-  color: #d0021b;
+  @media screen and (min-width: $tablet) {
+    display: flex;
+  }
 }
 
 .nav-searchbar {
@@ -165,28 +176,28 @@ header ul,
   transform: scaleX(1);
   transform-origin: right;
   transition: all 0.3s ease-out;
-}
 
-.nav-searchbar > input[type="text"] {
-  width: 100%;
-  box-sizing: border-box;
-  font: 14px "SF Pro Display";
-  border-radius: 8px;
-  padding: 6px 10px;
-  border: none;
+  & > input[type="text"] {
+    width: 100%;
+    box-sizing: border-box;
+    font: 14px "SF Pro Display";
+    border-radius: 8px;
+    padding: 6px 10px;
+    border: none;
+  }
 }
 
 .nav-actions {
   padding: 20px 0;
-}
 
-.nav-actions > li:nth-of-type(1) {
-  margin-right: 1rem;
-}
+  i {
+    font-size: 22px;
+    display: block;
+  }
 
-.nav-actions i {
-  font-size: 22px;
-  display: block;
+  & > li:nth-of-type(1) {
+    margin-right: 1rem;
+  }
 }
 
 .down-enter-active,
@@ -197,15 +208,5 @@ header ul,
 .side-enter-active,
 .side-leave-active {
   transform: scaleX(0);
-}
-
-@media screen and (min-width: 768px) {
-  .spacer {
-    display: none;
-  }
-
-  .nav-links {
-    display: flex;
-  }
 }
 </style>

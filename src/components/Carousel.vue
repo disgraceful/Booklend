@@ -102,37 +102,54 @@ export default {
 <style lang="scss" scoped>
 .bl-carousel {
   position: relative;
+  width: 70%;
+  margin: 0 auto;
+  justify-items: center;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-gap: 20px;
-  justify-items: center;
-  width: 70%;
-  margin: 0 auto;
+
+  @media screen and (min-width: $phone) {
+    grid-template-columns: repeat(4, 1fr);
+    width: 80%;
+  }
+
+  @media screen and (min-width: $tablet) {
+    width: 100%;
+    justify-items: stretch;
+    .bl-carousel-item--title {
+      display: block;
+    }
+  }
 }
 
-.bl-carousel > .bl-carousel-item {
+.bl-carousel-item {
   max-width: 220px;
   padding: 20px;
   background-color: #fff;
   border-radius: 24px;
   box-sizing: content-box;
   transition: all 0.2s ease-in;
-}
 
-.bl-carousel-item:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 20px 40px 0 rgba(0, 0, 0, 0.1);
-  cursor: pointer;
-}
+  &:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px 0 rgba(0, 0, 0, 0.1);
+    cursor: pointer;
 
-.bl-carousel-item:hover .bl-carousel-item--title {
-  color: $red-solid;
+    .bl-carousel-item--title {
+      color: color("red-solid");
+    }
+  }
 }
 
 .bl-carousel-item--title {
   font: 500 18px "SF Pro Display";
   color: #3d3d3d;
   display: none;
+
+  @media screen and (min-width: $tablet) {
+    display: block;
+  }
 }
 
 .bl-carousel-item--img {
@@ -141,15 +158,11 @@ export default {
   border-radius: 10px;
   overflow: hidden;
   margin-bottom: 12px;
-}
 
-.bl-carousel-item--img > img {
-  width: 100%;
-  object-fit: cover;
-}
-
-.bl-carousel-action:nth-of-type(1) {
-  left: -66px;
+  img {
+    width: 100%;
+    object-fit: cover;
+  }
 }
 
 .bl-carousel-action {
@@ -157,22 +170,9 @@ export default {
   top: 50%;
   position: absolute;
   right: -66px;
-}
 
-@media screen and (min-width: 480px) {
-  .bl-carousel {
-    grid-template-columns: repeat(4, 1fr);
-    width: 80%;
-  }
-}
-
-@media screen and (min-width: 768px) {
-  .bl-carousel-item--title {
-    display: block;
-  }
-  .bl-carousel {
-    width: 100%;
-    justify-items: stretch;
+  &:nth-of-type(1) {
+    left: -66px;
   }
 }
 </style>

@@ -12,20 +12,8 @@ export default {};
 .card-container {
   padding: 36px;
   border-radius: 24px;
-}
 
-.card-light {
-  background-color: #fff;
-  color: #000;
-}
-
-.card-dark {
-  background-color: $dark-blue;
-  color: #fff;
-}
-
-@media screen and (min-width: 768px) {
-  .card-container {
+  @media screen and (min-width: $tablet) {
     padding: 60px;
   }
 }

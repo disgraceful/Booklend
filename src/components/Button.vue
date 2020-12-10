@@ -11,40 +11,23 @@ export default {};
 <style lang="scss" scoped>
 .bl-btn {
   border: none;
-  font: 14px "SF Pro Display";
-  font-weight: 500;
+  font: 500 14px "SF Pro Display";
   text-transform: uppercase;
   padding: 12px 18px;
-  border-radius: 8px;
   margin-top: 20px;
+  border-radius: 8px;
+  color: color("red-solid");
+  background-color: color("red-transparent");
   transition: all 0.2s ease-in;
-}
 
-.card-light .bl-btn {
-  color: $red-solid;
-  background-color: $red-transparent;
-}
+  &:hover {
+    cursor: pointer;
+    color: #fff;
+    background-color: color("red-solid");
+  }
 
-.card-light .bl-btn:hover {
-  color: #fff;
-  background-color: $red-solid;
-}
-
-.card-dark .bl-btn {
-  color: $teal-solid;
-  background-color: $teal-transparent;
-}
-
-.card-dark .bl-btn:hover {
-  color: #fff;
-  background-color: $teal-solid;
-}
-
-.bl-btn:hover {
-  cursor: pointer;
-}
-
-.bl-btn:focus {
-  outline: none;
+  &:focus {
+    outline: none;
+  }
 }
 </style>

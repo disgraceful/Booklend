@@ -7,10 +7,10 @@
             <h3 class="card-title__decorated">
               Dont just take our word for it!
             </h3>
-            <div class="main-card__logo">
+            <div class="main-card--logo">
               <div class="logo__icon">R</div>
             </div>
-            <p class="card-text__heading">
+            <p class="card-text--heading">
               Read librarian reviews
               <br />
               the R2 Digital Library
@@ -44,15 +44,7 @@
               You'll see how the new version of the R2 Digital Library is a
               powerful eBook solution for your institution.
             </p>
-            <div class="video-container">
-              <img
-                class="video"
-                src="https://interamericanheart.org/wp-content/uploads/2020/03/covid19maxresdefault.jpg"
-              />
-              <button class="play-btn">
-                <div class="play-btn--arrow"></div>
-              </button>
-            </div>
+            <bl-video></bl-video>
           </bl-card>
         </div>
       </section>
@@ -63,7 +55,7 @@
       <section id="features">
         <div class="main-cards">
           <bl-card class="main-card card-dark grid-card">
-            <h3 class="card-text__heading">
+            <h3 class="card-text--heading">
               Expand Your Library Beyond eBooks
             </h3>
             <div>
@@ -133,7 +125,7 @@
             <h3 class="card-title__decorated">
               Featured publisher
             </h3>
-            <p class="card-text__heading">Health Administration Press</p>
+            <p class="card-text--heading">Health Administration Press</p>
             <bl-btn> See full list of items</bl-btn>
           </div>
           <div class="card-img">
@@ -144,7 +136,7 @@
       <section id="faq">
         <div class="grid-reverse">
           <bl-card class="card-dark">
-            <h1 class="card-text__heading">
+            <h1 class="card-text--heading">
               Benefits of eContent and the R2 Digital Library
             </h1>
             <p class="card-text__regular">
@@ -156,7 +148,7 @@
             <bl-btn>Visit our help section</bl-btn>
           </bl-card>
           <bl-card class="main-card card-dark">
-            <h1 class="card-text__heading">
+            <h1 class="card-text--heading">
               Does the R2 Library have the Titles I need?
             </h1>
             <p class="card-text__regular">
@@ -199,7 +191,9 @@
 import Card from "./Card.vue";
 import Button from "./Button.vue";
 import Fab from "./Fab.vue";
+import VideoPlayer from "./VideoPlayer";
 import Carousel from "./Carousel.vue";
+
 import { ref } from "vue";
 export default {
   components: {
@@ -207,6 +201,7 @@ export default {
     "bl-btn": Button,
     "bl-fab": Fab,
     "bl-carousel": Carousel,
+    "bl-video": VideoPlayer,
   },
 
   setup() {
@@ -248,222 +243,202 @@ export default {
 
 <style lang="scss" scoped>
 section {
-  margin: 30px 0;
+  margin: 30px 0px;
+  @media screen and (min-width: $tablet) {
+    margin: 80px 0px;
+  }
+
+  .section-title {
+    color: #000;
+    font: 700 72px "SF Pro Display";
+    text-align: center;
+
+    @media screen and (min-width: $tablet) {
+      text-align: start;
+    }
+  }
 }
 
 section > * {
   margin: 30px 0px;
 }
-.grid-reverse,
+
 .main-cards {
   display: grid;
   grid-template-columns: 1fr;
   grid-gap: 20px;
 }
 
+.grid-reverse {
+  @extend .main-cards;
+
+  @media screen and (min-width: $tablet) {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1fr 64px;
+  }
+
+  & > .grid-card:nth-of-type(1) {
+    @media screen and (min-width: $tablet) {
+      grid-row: span 2;
+    }
+  }
+}
+
 .main-card {
   position: relative;
   overflow: hidden;
+  min-width: 350px;
+
+  .main-card--logo {
+    position: absolute;
+    right: 85px;
+    top: -103px;
+  }
+
+  .logo__icon {
+    font-size: 200px;
+    color: #000;
+    opacity: 0.1;
+
+    &::after {
+      font-size: 80px;
+      top: 124px;
+      left: 99px;
+    }
+  }
 }
 
-.main-card__logo {
+.card-actions {
   position: absolute;
-  right: 85px;
-  top: -103px;
-}
-
-.main-card .logo__icon {
-  font-size: 200px;
-  color: #000;
-  opacity: 0.1;
-}
-
-.main-card .logo__icon::after {
-  font-size: 80px;
-  top: 124px;
-  left: 99px;
-}
-
-.main-card .card-actions {
-  margin-right: -16px;
-  margin-bottom: -16px;
+  bottom: 20px;
+  right: 20px;
   display: flex;
   justify-content: center;
-  margin-top: 20px;
   text-align: center;
+
+  & > .bl-fab {
+    &:first-child {
+      margin-right: 10px;
+    }
+  }
 }
 
-.main-card .card-actions > .bl-fab:first-child {
-  margin-right: 10px;
-}
-
-.card-text__heading {
-  max-width: 75%;
-  font: 48px "SF Pro Display";
-  font-weight: 900;
-}
-
-.card-light .card-text__heading {
+.card-light {
+  background-color: #fff;
   color: #000;
+
+  .card-text--heading {
+    color: #000;
+  }
+
+  .card-title__decorated,
+  .card-title__regular {
+    color: color("red-solid");
+  }
+
+  &.card-mini {
+    background-color: $red-solid;
+    padding: 20px 24px;
+    box-shadow: 0px 0px 20px 5px $red-transparent;
+
+    i {
+      color: #fff;
+      position: absolute;
+      top: 10px;
+      left: 24px;
+    }
+
+    .card-text__regular {
+      color: #fff;
+      margin: 0;
+    }
+  }
 }
 
-.card-dark .card-text__heading {
-  color: $teal-solid;
+.card-dark {
+  background-color: color("dark-blue");
+  color: #fff;
+
+  .card-text--heading,
+  .card-title__regular {
+    color: color("teal-solid");
+  }
+
+  .card-text__regular {
+    color: #fff;
+  }
+
+  .bl-btn {
+    color: color("teal-solid");
+    background-color: color("teal-transparent");
+
+    &:hover {
+      color: #fff;
+      background-color: color("teal-solid");
+    }
+  }
 }
 
-.card-light .card-title__decorated {
-  color: $red-solid;
-  font: 300 24px "SF Pro Display";
-  font-style: italic;
+/* Start text styling */
+.card-text--heading {
+  font: 900 48px "SF Pro Display";
+}
+
+.card-title__decorated {
+  font: italic 300 24px "SF Pro Display";
 }
 
 .card-title__regular {
   font: 500 14px "SF Pro Display";
 }
 
-.card-dark .card-title__regular {
-  color: $teal-solid;
-}
-
-.card-light .card-title__regular {
-  color: $red-solid;
-}
-
 .card-text__regular {
   font: 400 18px "SF Pro Display";
   line-height: 24px;
   color: #000;
-  margin-top: 10px;
+  margin: 10px 0px;
 }
-
-.card-dark .card-text__regular {
-  color: #fff;
-}
-
-.video-container {
-  width: 210px;
-  height: 160px;
-  position: absolute;
-  margin-top: 8px;
-  bottom: 20px;
-  right: 20px;
-  cursor: pointer;
-  transition: all 0.2s ease-out;
-  box-shadow: 0 20px 40px 0 rgba(208, 2, 27, 0.3);
-  border-radius: 12px;
-  overflow: hidden;
-}
-
-.video-container:hover {
-  transform: translate(6px, 6px);
-  box-shadow: 0 10px 20px 0 rgba(208, 2, 27, 0.3);
-}
-
-.video-container::after {
-  content: "";
-  height: 100%;
-  width: 100%;
-  background-color: rgba(208, 2, 27, 0.7);
-  top: 0;
-  left: 0;
-  z-index: 4;
-  position: absolute;
-}
-
-.video-container > .video {
-  height: 100%;
-  width: 100%;
-  object-fit: cover;
-  border-radius: 12px;
-}
-
-.video-container > .play-btn {
-  margin: 0;
-  position: absolute;
-  width: 72px;
-  height: 72px;
-  border: 8px solid rgba(255, 255, 255, 0.3);
-  background-clip: padding-box;
-  top: calc(50% - 36px);
-  left: 50%;
-  margin-left: -36px;
-  z-index: 10;
-  background-color: #fff;
-  border-radius: 50%;
-  cursor: pointer;
-  transition: all 0.2s ease-out;
-}
-
-.play-btn:hover {
-  border-color: #fff;
-  background-clip: border-box;
-}
-
-.play-btn:hover > .play-btn--arrow {
-  left: calc(50% - 13px);
-  top: calc(50% - 25px);
-  border-top: 26px solid transparent;
-  border-bottom: 26px solid transparent;
-  border-left: 35px solid #d0021b;
-}
-
-.play-btn--arrow {
-  position: absolute;
-  left: calc(50% - 5px);
-  top: calc(50% - 10px);
-  width: 0;
-  height: 0;
-  border-top: 12px solid transparent;
-  border-bottom: 12px solid transparent;
-  border-left: 16px solid #d0021b;
-}
+/* End text styling */
 
 .card-icon {
   font-size: 46px;
   padding-bottom: 10px;
+
+  &.icon-red {
+    color: #c62828;
+  }
+  &.icon-blue {
+    color: #42a5f5;
+  }
+
+  &.icon-green {
+    color: #4caf50;
+  }
+
+  &.icon-yellow {
+    color: #ffa726;
+  }
 }
 
-.card-icon.icon-red {
-  color: #c62828;
-}
-
-.card-icon.icon-blue {
-  color: #42a5f5;
-}
-
-.card-icon.icon-green {
-  color: #4caf50;
-}
-
-.card-icon.icon-yellow {
-  color: #ffa726;
-}
-
-.section-title {
-  color: #000;
-  font: 700 72px "SF Pro Display";
-  text-align: center;
-}
-
-.main-card .card-img {
+.card-img {
   width: 400px;
   height: 400px;
   overflow: hidden;
   text-align: center;
   margin-bottom: -120px;
   margin-left: 140px;
-}
 
-.card-img > img {
-  margin: 20px 40px;
-  height: 100%;
-  width: auto;
-  border-top-right-radius: 10px;
-  border-top-left-radius: 10px;
-  object-fit: cover;
-  object-position: top;
-  box-sizing: border-box;
-  box-shadow: 0px 0px 20px 5px rgba(0, 0, 0, 0.2);
+  img {
+    margin: 20px 40px;
+    height: 100%;
+    width: auto;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    object-fit: cover;
+    object-position: top;
+    box-sizing: border-box;
+    box-shadow: 0px 0px 20px 5px rgba(0, 0, 0, 0.2);
+  }
 }
 
 .grid-card {
@@ -471,88 +446,60 @@ section > * {
   grid-template-columns: 1fr;
 }
 
-.grid-card .card-text__heading {
-  max-width: 100%;
-}
-
-.card-mini.card-light {
-  background-color: $red-solid;
-  padding: 20px 24px;
-  box-shadow: 0px 0px 20px 5px $red-transparent;
-}
-
-.card-mini i {
-  color: #fff;
-  position: absolute;
-  top: 10px;
-  left: 24px;
-}
-
-.card-mini .card-text__regular {
-  color: #fff;
-  margin: 0;
-}
-
 footer {
   display: flex;
   justify-content: center;
   text-align: center;
   flex-direction: column;
-  font-size: 14px;
-  font-weight: 400;
+  font: 400 14px "SF Pro Display";
   padding-bottom: 30px;
-  font-family: "SF Pro Display";
-}
 
-.footer-text {
-  color: #969696;
+  .footer-text {
+    color: #969696;
+  }
 }
 
 .footer-links {
   display: flex;
   flex-direction: column;
   justify-content: center;
-}
+  align-items: center;
 
-.footer-links--link {
-  margin-left: 1rem;
-  padding-top: 0.5rem;
-  color: $red-solid;
-  cursor: pointer;
-  position: relative;
-}
-
-.footer-links--link:hover::after {
-  transform: scale(1);
-}
-
-.footer-links--link::after {
-  transform: scale(0);
-  content: "";
-  height: 1px;
-  width: 100%;
-  display: block;
-  background-color: $red-solid;
-  position: absolute;
-  bottom: -2px;
-  transform-origin: left;
-  transition: all 0.3s ease-in;
-}
-
-@media screen and (min-width: 768px) {
-  section {
-    margin: 80px 0;
+  @media screen and (min-width: $tablet) {
+    flex-direction: row;
   }
 
-  .grid-reverse {
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: 1fr 64px;
-  }
+  .footer-links--link {
+    // display: inline-flex;
+    flex: 0 1;
+    margin-left: 1rem;
+    padding-top: 0.5rem;
+    color: color("red-solid");
+    position: relative;
+    cursor: pointer;
 
-  .grid-reverse > *:nth-of-type(1) {
-    grid-row: span 2;
-  }
+    &::after {
+      content: "";
+      height: 1px;
+      width: 100%;
+      display: block;
+      background-color: color("red-solid");
+      position: absolute;
+      bottom: -2px;
+      transform: scale(0);
+      transform-origin: left;
+      transition: all 0.3s ease-in;
+    }
 
+    &:hover {
+      &::after {
+        transform: scale(1);
+      }
+    }
+  }
+}
+
+@media screen and (min-width: $tablet) {
   .grid-card,
   .main-cards {
     grid-template-columns: repeat(2, 1fr);
@@ -560,21 +507,6 @@ footer {
 
   .main-card:nth-of-type(1) {
     grid-column: span 2;
-  }
-
-  .main-card .card-actions {
-    margin-right: -40px;
-    margin-bottom: -40px;
-    margin-top: 4px;
-    justify-content: flex-end;
-  }
-
-  .section-title {
-    text-align: start;
-  }
-
-  .footer-links {
-    flex-direction: row;
   }
 }
 </style>

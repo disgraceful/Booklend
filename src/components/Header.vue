@@ -96,29 +96,29 @@ header {
 .logo {
   color: #fff;
   opacity: 0.8;
+}
 
-  .logo__icon {
-    display: inline-block;
-    font: 48px "SF Mono";
-    position: relative;
+.logo__icon {
+  display: inline-block;
+  font: 48px "SF Mono";
+  position: relative;
 
-    &::after {
-      content: "2";
-      color: color("red-solid");
-      font-size: 24px;
-      position: absolute;
-      opacity: 1;
-      top: 26px;
-      transform: translateX(-7px);
-    }
+  &::after {
+    content: "2";
+    color: color("red-solid");
+    font-size: 24px;
+    position: absolute;
+    opacity: 1;
+    top: 26px;
+    transform: translateX(-7px);
   }
+}
 
-  .logo__company {
-    font: 14px "SF Pro Rounded";
-    text-transform: uppercase;
-    align-self: center;
-    margin-left: 1rem;
-  }
+.logo__company {
+  font: 14px "SF Pro Rounded";
+  text-transform: uppercase;
+  align-self: center;
+  margin-left: 1rem;
 }
 
 .spacer {
@@ -141,7 +141,7 @@ header {
   transform: scaleY(1);
   transform-origin: top;
   transition: all 0.3s ease-in-out;
-  z-index: 5;
+  z-index: 10;
 
   .nav-sidebar__list {
     flex-flow: column wrap;

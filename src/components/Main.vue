@@ -204,6 +204,7 @@ export default {
     "bl-video": VideoPlayer,
   },
 
+
   setup() {
     const carouselItems = ref([
       {
@@ -470,8 +471,6 @@ footer {
   }
 
   .footer-links--link {
-    // display: inline-flex;
-    flex: 0 1;
     margin-left: 1rem;
     padding-top: 0.5rem;
     color: color("red-solid");

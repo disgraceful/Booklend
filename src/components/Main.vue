@@ -204,7 +204,6 @@ export default {
     "bl-video": VideoPlayer,
   },
 
-
   setup() {
     const carouselItems = ref([
       {
@@ -307,6 +306,8 @@ section > * {
       left: 99px;
     }
   }
+
+  
 }
 
 .card-actions {
@@ -338,9 +339,9 @@ section > * {
   }
 
   &.card-mini {
-    background-color: $red-solid;
+    background-color: color("red-solid");
     padding: 20px 24px;
-    box-shadow: 0px 0px 20px 5px $red-transparent;
+    box-shadow: 0px 0px 20px 5px color("red-transparent");
 
     i {
       color: #fff;

@@ -1,11 +1,31 @@
 <template>
-  <button class="bl-btn">
+  <button
+    class="bl-btn"
+    :class="{ 'bl-btn__small': small, 'bl-btn__text': text }"
+  >
     <slot></slot>
   </button>
 </template>
 
 <script>
-export default {};
+export default {
+  props: {
+    small: {
+      type: Boolean,
+      default: false,
+    },
+
+    text: {
+      type: Boolean,
+      default: false,
+    },
+
+    color: {
+      type: String,
+      default: "red-solid",
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
@@ -14,7 +34,6 @@ export default {};
   font: 500 14px "SF Pro Display";
   text-transform: uppercase;
   padding: 12px 18px;
-  margin-top: 20px;
   border-radius: 8px;
   color: color("red-solid");
   background-color: color("red-transparent");
@@ -28,6 +47,15 @@ export default {};
 
   &:focus {
     outline: none;
+  }
+
+  &.bl-btn__small {
+    padding: 8px 14px;
+    font-size: 12px;
+  }
+
+  &.bl-btn__text {
+    background-color: transparent;
   }
 }
 </style>

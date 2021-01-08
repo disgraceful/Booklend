@@ -1,7 +1,7 @@
 <template>
   <div
     class="bl-fab"
-    :class="{ 'bl-fab__right': right, 'bl-fab__disabled': this.disabled }"
+    :class="{ 'bl-fab__right': right, 'bl-fab__disabled': disabled }"
   ></div>
 </template>
 
@@ -22,23 +22,6 @@ export default {
       default: true,
     },
   },
-
-  // FUCK Vue render functions. I DO NOT UNDERSTAND!! D:<
-  //   render() {
-  //     return h(
-  //       "div",
-  //       {
-  //         class: [
-  //           "bl-fab",
-  //           {
-  //             "bl-fab__right": this.right,
-  //             "bl-fab__disabled": this.disabled,
-  //           },
-  //         ],
-  //       },
-  //       [h("div", { staticClass: "bl-fab__content" })]
-  //     );
-  //   },
 };
 </script>
 
@@ -55,7 +38,7 @@ export default {
   &::before {
     content: "";
     position: absolute;
-    background-color: $red-solid;
+    background-color: color("red-solid");
     height: 2px;
     width: 8px;
     border-radius: 8px;

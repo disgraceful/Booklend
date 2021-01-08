@@ -16,5 +16,9 @@ export default {};
   @media screen and (min-width: $tablet) {
     padding: 60px;
   }
+
+  .bl-btn {
+    margin-top: 20px;
+  }
 }
 </style>

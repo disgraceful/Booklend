@@ -2,10 +2,11 @@
 
 ### To-do
 
-1. Video-container and animations
-2. Fix absolute img positioned + img shadow
-3. Comment functionality
-4. css => sass
+1. Date for comments
+2. Update comment text
+3. Display on hover
+4. Multiple comments
+5. Local Storage save?
 
 ## Project setup
 

@@ -1,7 +1,11 @@
 <template>
   <button
     class="bl-btn"
-    :class="{ 'bl-btn__small': small, 'bl-btn__text': text }"
+    :class="{
+      'bl-btn__small': small,
+      'bl-btn__text': text,
+      'bl-btn__hover': hover,
+    }"
   >
     <slot></slot>
   </button>
@@ -20,9 +24,9 @@ export default {
       default: false,
     },
 
-    color: {
-      type: String,
-      default: "red-solid",
+    hover: {
+      type: Boolean,
+      default: false,
     },
   },
 };
@@ -41,8 +45,6 @@ export default {
 
   &:hover {
     cursor: pointer;
-    color: #fff;
-    background-color: color("red-solid");
   }
 
   &:focus {
@@ -56,6 +58,13 @@ export default {
 
   &.bl-btn__text {
     background-color: transparent;
+  }
+
+  &.bl-btn__hover {
+    &:hover {
+      color: #fff;
+      background-color: color("red-solid");
+    }
   }
 }
 </style>

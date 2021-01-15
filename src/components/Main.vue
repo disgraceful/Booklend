@@ -15,7 +15,7 @@
               <br />
               the R2 Digital Library
             </p>
-            <bl-btn>
+            <bl-btn hover>
               Go to the reviews section
             </bl-btn>
             <div class="card-actions">
@@ -32,7 +32,7 @@
               cross-referenced eContent. Featuring thousands of resources from
               the leading health sciences publishers—and growing every day.
             </p>
-            <bl-btn>
+            <bl-btn hover>
               Go to the reviews section
             </bl-btn>
           </bl-card>
@@ -66,7 +66,7 @@
                 content from key health science publishers, on a web based
                 platform.
               </p>
-              <bl-btn>
+              <bl-btn hover>
                 See full list of titles
               </bl-btn>
             </div>
@@ -126,7 +126,7 @@
               Featured publisher
             </h3>
             <p class="card-text--heading">Health Administration Press</p>
-            <bl-btn> See full list of items</bl-btn>
+            <bl-btn hover> See full list of items</bl-btn>
           </div>
           <div class="card-img">
             <img :src="require('../assets/img/bookasset1.jpg')" />
@@ -145,7 +145,7 @@
               answers to some very common questions about the benefits of using
               eContent and the R2 Digital Library as your platform.
             </p>
-            <bl-btn>Visit our help section</bl-btn>
+            <bl-btn hover>Visit our help section</bl-btn>
           </bl-card>
           <bl-card class="main-card card-dark">
             <h1 class="card-text--heading">
@@ -306,8 +306,6 @@ section > * {
       left: 99px;
     }
   }
-
-  
 }
 
 .card-actions {

@@ -1,8 +1,36 @@
 <template>
   <div class="comment-card" :style="styleObj">
+    <div class="comment">
+      <div class="comment-avatar">
+        <img
+          src="https://i.pinimg.com/236x/29/4c/b3/294cb357c2ae3576ebd6f7c2605cc095.jpg"
+        />
+      </div>
+      <div class="comment-data">
+        <div class="comment-header">
+          <div class="comment-name">Test Name</div>
+          <div class="comment-time">10:33</div>
+        </div>
+        <div class="comment-text">This is comment text</div>
+        <bl-btn small text>Resolve</bl-btn>
+      </div>
+    </div>
     <div class="comment-actions">
-      <input type="text" placeholder="Add comment..." />
-      <bl-button small text class="comment-btn">Send</bl-button>
+      <input
+        v-model="comment"
+        type="text"
+        placeholder="Add comment..."
+        @focus="$emit('active', true)"
+        @blur="$emit('active', !!comment)"
+      />
+      <bl-btn
+        v-show="comment"
+        @click="comment && $emit('submit', comment)"
+        small
+        text
+        class="comment-btn"
+        >Send</bl-btn
+      >
     </div>
   </div>
 </template>
@@ -18,7 +46,13 @@ export default {
   },
 
   components: {
-    "bl-button": Button,
+    "bl-btn": Button,
+  },
+
+  data() {
+    return {
+      comment: "",
+    };
   },
 
   computed: {
@@ -56,6 +90,48 @@ export default {
     &:focus {
       outline: none;
     }
+  }
+}
+
+.comment {
+  display: flex;
+
+  .comment-data {
+    @extend .comment;
+    flex-direction: column;
+    flex: 1 0;
+    font: 500 14px "SF Pro Display";
+    color: #969696;
+  }
+
+  .comment-header {
+    @extend .comment;
+    justify-content: space-between;
+    margin-bottom: 0.4rem;
+    font-weight: 600;
+    color: #000;
+  }
+
+  .comment-avatar {
+    height: 36px;
+    width: 36px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 0.5rem;
+
+    & img {
+      object-fit: cover;
+      height: 100%;
+      width: 100%;
+    }
+  }
+
+  .bl-btn {
+    align-self: start;
+    box-sizing: border-box;
+    margin-bottom: 0.5rem;
+    padding-right: 0;
+    padding-left: 0;
   }
 }
 

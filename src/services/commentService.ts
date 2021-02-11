@@ -2,7 +2,7 @@ function saveComments(comments: Array<string>) {
   localStorage.setItem('comments', JSON.stringify(comments));
 }
 
-function getComments() {
+export function getComments() {
   const comments = localStorage.getItem('comments');
   console.log(comments);
 

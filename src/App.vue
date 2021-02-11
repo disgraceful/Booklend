@@ -76,13 +76,14 @@ export default {
       newSpan.style.backgroundColor = '#ffeb3b';
       newSpan._id = id;
       this.comment.selection.surroundContents(newSpan);
+      console.log(this.comment.selection);
 
       newSpan.addEventListener('mouseover', (event) => {
         console.log(event);
         this.comment.show = true;
         this.comment.commentText = getCommentById(newSpan._id);
-        this.comment.coords.x = event.clientX + 20;
-        this.comment.coords.y = event.clientY + 20;
+        this.comment.coords.x = event.clientX + 10;
+        this.comment.coords.y = event.clientY + 10;
       });
 
       newSpan.addEventListener('mouseleave', (event) => {
@@ -90,7 +91,7 @@ export default {
         this.comment.commentText = '';
       });
 
-      addComment(commentText, id);
+      addComment(commentText, id, parent);
     }
   },
   created(){

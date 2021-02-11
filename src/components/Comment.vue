@@ -1,9 +1,10 @@
 <template>
   <div class="comment-card" :style="styleObj">
-    <div class="comment">
+    <div class="comment" v-if="commentText">
       <div class="comment-avatar">
         <img
           src="https://i.pinimg.com/236x/29/4c/b3/294cb357c2ae3576ebd6f7c2605cc095.jpg"
+          alt="Avatar"
         />
       </div>
       <div class="comment-data">
@@ -11,11 +12,11 @@
           <div class="comment-name">Test Name</div>
           <div class="comment-time">10:33</div>
         </div>
-        <div class="comment-text">This is comment text</div>
+        <div class="comment-text">{{ commentText }}</div>
         <bl-btn small text>Resolve</bl-btn>
       </div>
     </div>
-    <div class="comment-actions">
+    <div class="comment-actions" v-else>
       <input
         v-model="comment"
         type="text"
@@ -29,40 +30,44 @@
         small
         text
         class="comment-btn"
-        >Send</bl-btn
       >
+        Send
+      </bl-btn>
     </div>
   </div>
 </template>
 
 <script>
-import Button from "./Button";
+import Button from './Button';
 export default {
   props: {
     coords: {
       type: Object,
-      required: true,
+      required: true
     },
+    commentText: {
+      type: String
+    }
   },
 
   components: {
-    "bl-btn": Button,
+    'bl-btn': Button
   },
 
   data() {
     return {
-      comment: "",
+      comment: ''
     };
   },
 
   computed: {
     styleObj() {
       return {
-        top: this.coords.y + "px",
-        left: this.coords.x + "px",
+        top: this.coords.y + 'px',
+        left: this.coords.x + 'px'
       };
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -76,8 +81,9 @@ export default {
   //   min-height: 200px;
   min-width: 300px;
   box-shadow: 2px 2px 10px 5px rgba(0, 0, 0, 0.1);
+  z-index: 999;
 
-  input[type="text"] {
+  input[type='text'] {
     width: 100%;
     padding: 0.4rem;
     background-color: rgba(244, 245, 247, 1);
@@ -100,7 +106,7 @@ export default {
     @extend .comment;
     flex-direction: column;
     flex: 1 0;
-    font: 500 14px "SF Pro Display";
+    font: 500 14px 'SF Pro Display';
     color: #969696;
   }
 
@@ -141,7 +147,7 @@ export default {
   .comment-btn {
     position: absolute;
     bottom: 0px;
-    color: color("teal-solid");
+    color: color('teal-solid');
     right: 0px;
   }
 }

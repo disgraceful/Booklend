@@ -3,6 +3,7 @@
   <bl-main></bl-main>
   <bl-comment
     v-if="comment.show"
+    :commentText="comment.commentText"
     :coords="comment.coords"
     @active="comment.active = $event"
     @submit="saveComment($event)"
@@ -10,22 +11,22 @@
 </template>
 
 <script>
-import Header from "@/components/Header.vue";
-import Main from "@/components/Main.vue";
-import Comment from "@/components/Comment.vue";
-
+import Header from '@/components/Header.vue';
+import Main from '@/components/Main.vue';
+import Comment from '@/components/Comment.vue';
+import { addComment, getCommentById } from '@/services/commentService.ts';
 // import textSelect from "./directive/textSelect";
 
 export default {
-  name: "App",
-  components: { "bl-header": Header, "bl-main": Main, "bl-comment": Comment },
+  name: 'App',
+  components: { 'bl-header': Header, 'bl-main': Main, 'bl-comment': Comment },
   directives: {
-    "text-select": {
+    'text-select': {
       beforeMount: function(el, binding, vnode) {
-        document.body.addEventListener("mouseup", (event) => {
+        document.body.addEventListener('mouseup', (event) => {
           const selected = window.getSelection();
           const selectedText = selected?.toString();
-          if (selected !== null && selectedText !== "") {
+          if (selected !== null && selectedText !== '') {
             const range = selected.getRangeAt(0);
             if (range) {
               binding.value.selection = range;
@@ -38,10 +39,10 @@ export default {
             binding.value.show = false;
           }
         });
-      },
+      }
 
       // beforeUnmount(el: any, binding: any, vnode: any) {},
-    },
+    }
   },
 
   data() {
@@ -51,7 +52,8 @@ export default {
         active: false,
         coords: { x: 0, y: 0 },
         selection: null,
-      },
+        commentText: ''
+      }
     };
   },
 
@@ -63,13 +65,36 @@ export default {
     },
 
     saveComment(commentText) {
+      console.log(this.comment);
       this.comment.active = false;
+      this.comment.show = false;
+
+      const id = new Date().getTime() + '_';
 
       //paint bg yellow
-      const newSpan = document.createElement("span");
-      newSpan.style.backgroundColor = "#ffeb3b";
+      const newSpan = document.createElement('span');
+      newSpan.style.backgroundColor = '#ffeb3b';
+      newSpan._id = id;
       this.comment.selection.surroundContents(newSpan);
-    },
+
+      newSpan.addEventListener('mouseover', (event) => {
+        console.log(event);
+        this.comment.show = true;
+        this.comment.commentText = getCommentById(newSpan._id);
+        this.comment.coords.x = event.clientX + 20;
+        this.comment.coords.y = event.clientY + 20;
+      });
+
+      newSpan.addEventListener('mouseleave', (event) => {
+        this.comment.show = false;
+        this.comment.commentText = '';
+      });
+
+      addComment(commentText, id);
+    }
   },
+  created(){
+    console.log(this.$store);
+  }
 };
 </script>

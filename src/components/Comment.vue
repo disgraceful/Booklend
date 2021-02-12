@@ -1,6 +1,6 @@
 <template>
   <div class="comment-card" :style="styleObj">
-    <div class="comment" v-if="commentText">
+    <div class="comment" v-if="commentData.commentText">
       <div class="comment-avatar">
         <img
           src="https://i.pinimg.com/236x/29/4c/b3/294cb357c2ae3576ebd6f7c2605cc095.jpg"
@@ -9,10 +9,10 @@
       </div>
       <div class="comment-data">
         <div class="comment-header">
-          <div class="comment-name">Test Name</div>
+          <div class="comment-name">Anime Girl</div>
           <div class="comment-time">10:33</div>
         </div>
-        <div class="comment-text">{{ commentText }}</div>
+        <div class="comment-text">{{ commentData.commentText }}</div>
         <bl-btn small text>Resolve</bl-btn>
       </div>
     </div>
@@ -21,12 +21,12 @@
         v-model="comment"
         type="text"
         placeholder="Add comment..."
-        @focus="$emit('active', true)"
-        @blur="$emit('active', !!comment)"
+        @focus="$store.commit('setCommentActive', true)"
+        @blur="$store.commit('setCommentActive', !!comment)"
       />
       <bl-btn
         v-show="comment"
-        @click="comment && $emit('submit', comment)"
+        @click="comment && $store.dispatch('saveComment', comment)"
         small
         text
         class="comment-btn"
@@ -40,16 +40,6 @@
 <script>
 import Button from './Button';
 export default {
-  props: {
-    coords: {
-      type: Object,
-      required: true
-    },
-    commentText: {
-      type: String
-    }
-  },
-
   components: {
     'bl-btn': Button
   },
@@ -61,10 +51,14 @@ export default {
   },
 
   computed: {
+    commentData() {
+      return this.$store.getters.getCommentData;
+    },
+
     styleObj() {
       return {
-        top: this.coords.y + 'px',
-        left: this.coords.x + 'px'
+        top: this.commentData.coords.y + 'px',
+        left: this.commentData.coords.x + 'px'
       };
     }
   }

@@ -3,11 +3,8 @@
 ### To-do
 
 1. Date for comments
-2. Update comment text
-3. Display on hover
-4. Multiple comments
-5. Local Storage save?
-
+2. Resolve comments
+3. Multiple comments on same selected
 ## Project setup
 
 ```

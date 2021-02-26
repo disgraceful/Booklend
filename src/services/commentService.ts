@@ -18,8 +18,22 @@ export function addComment(comment: string, id: string, parentSelector: string, 
   saveComments(comments);
 }
 
-export function getCommentById(id: string) {
+export function getCommentById(id: string): Comment | null {
   const comments = getComments();
-  const found = comments.filter((c: Comment) => c.id == id);
-  return found[0]?.comment || '';
+  const found = comments.find((c: Comment) => c.id == id);
+  return found || null;
+}
+
+export function getCommentTextById(id: string) {
+  const comment = getCommentById(id);
+  return comment ? comment.comment : "";
+}
+
+
+
+export function deleteComment(id: string) {
+  const comments = getComments();
+  const newComments = comments.filter((c: Comment) => c.id != id);
+  saveComments(newComments);
+
 }

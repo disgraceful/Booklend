@@ -1,5 +1,10 @@
 <template>
-  <div class="comment-card" :style="styleObj">
+  <div
+    class="comment-card"
+    :style="styleObj"
+    @mouseover="hoverListener()"
+    @mouseleave="unhover()"
+  >
     <div class="comment" v-if="commentData.commentText">
       <div class="comment-avatar">
         <img
@@ -13,10 +18,10 @@
           <div class="comment-time">10:33</div>
         </div>
         <div class="comment-text">{{ commentData.commentText }}</div>
-        <bl-btn small text>Resolve</bl-btn>
+        <bl-btn small text @click="resolve()">Resolve</bl-btn>
       </div>
     </div>
-    <div class="comment-actions" v-else>
+    <div class="comment-actions">
       <input
         v-model="comment"
         type="text"
@@ -60,6 +65,20 @@ export default {
         top: this.commentData.coords.y + 'px',
         left: this.commentData.coords.x + 'px'
       };
+    }
+  },
+  methods: {
+    hoverListener() {
+      this.$store.commit('setCommentActive', true);
+    },
+
+    unhover(){
+      this.$store.commit('setCommentActive', false);
+      this.$store.commit('setCommentShow', false);
+    },
+
+    resolve(){
+      this.$store.dispatch('deleteComment');
     }
   }
 };

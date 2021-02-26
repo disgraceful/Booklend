@@ -1,6 +1,6 @@
 import { Comment } from '@/model/Comment'
-import { CommentData, Coords } from "@/model/CommentData"
-import { addComment, getCommentById, getComments } from "@/services/commentService"
+import { CommentData } from "@/model/CommentData"
+import { addComment, getCommentTextById, getComments, deleteComment, getCommentById } from "@/services/commentService"
 import { InjectionKey } from 'vue'
 import { createStore, Store } from 'vuex'
 
@@ -40,6 +40,10 @@ export const store = createStore<State>({
             state.commentData.selectedText = payload;
         },
 
+        setCommentId(state, payload) {
+            state.commentData.id = payload;
+        },
+
         setCommentShow(state, payload) {
             state.commentData.show = payload;
         },
@@ -53,8 +57,8 @@ export const store = createStore<State>({
             state.commentData.active = payload;
         },
 
-        setCommentText(state, payload) {
-            state.commentData.commentText = payload;
+        setComment(state, payload) {
+            state.commentData.comments = payload;
         }
 
     },
@@ -71,14 +75,12 @@ export const store = createStore<State>({
                     return;
                 }
 
-                console.log(parent);
                 parent.innerHTML = comment.parentInnerHTML;
             });
 
 
             const commentSpans = document.querySelectorAll(`.${commentClass}`);
             comments.forEach(comment => {
-
                 const commentSpan = Array.from(commentSpans).find((span) => span.id == comment.id);
                 if (commentSpan) {
                     dispatch('setEventHandlers', { span: commentSpan, id: comment.id })
@@ -107,16 +109,35 @@ export const store = createStore<State>({
             dispatch('setEventHandlers', { span: newSpan, id });
         },
 
-        setEventHandlers({ commit }, { span, id }) {
-            span.addEventListener('mouseover', (event: any) => {
+
+        deleteComment({ commit }) {
+            const id = this.getters.getCommentData.id;
+            const comment = getCommentById(id);
+            if (!comment) { return; }
+
+            const commentSpans = document.querySelectorAll(`.${commentClass}`);
+            const selectedSpan = Array.from(commentSpans).find((span) => span.id == comment.id);
+            if(selectedSpan){
+                console.log(selectedSpan.parentElement);
+            }
+
+            // deleteComment(id);
+
+        },
+
+        setEventHandlers({ commit }, payload) {
+            payload.span.addEventListener('mouseover', (event: any) => {
                 commit('setCommentShow', true);
-                commit('setCommentText', getCommentById(id));
-                commit('setCommentCoords', { x: event.clientX + 10, y: event.clientY + 10 })
+                setTimeout(() => commit('setCommentActive', true), 1000);
+                commit('setCommentText', getCommentTextById(payload.id));
+                commit('setCommentCoords', { x: event.clientX + 10, y: event.clientY + 10 });
+                commit('setCommentId', payload.id)
             });
 
-            span.addEventListener('mouseleave', () => {
-                commit('setCommentShow', false);
-                commit('setCommentText', '');
+            payload.span.addEventListener('mouseleave', () => {
+                if (!this.getters.getCommentData.active) {
+                    commit('setCommentShow', false);
+                }
             });
         }
     }
